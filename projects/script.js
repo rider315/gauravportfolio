@@ -20,7 +20,7 @@ $(document).ready(function () {
 document.addEventListener('visibilitychange',
     function () {
         if (document.visibilityState === "visible") {
-            document.title = "Projects | Portfolio Jigar Sable";
+            document.title = "Projects | Portfolio Gaurav Chaudhary";
             $("#favicon").attr("href", "/assets/images/favicon.png");
         }
         else {
@@ -28,9 +28,6 @@ document.addEventListener('visibilitychange',
             $("#favicon").attr("href", "/assets/images/favhand.png");
         }
     });
-
-
-// fetch projects start
 function getProjects() {
     return fetch("projects.json")
         .then(response => response.json())
@@ -64,25 +61,6 @@ function showProjects(projects) {
     </div>`
     });
     projectsContainer.innerHTML = projectsHTML;
-
-    // vanilla tilt.js
-    // VanillaTilt.init(document.querySelectorAll(".tilt"), {
-    //     max: 20,
-    // });
-    // // vanilla tilt.js  
-
-    // /* ===== SCROLL REVEAL ANIMATION ===== */
-    // const srtop = ScrollReveal({
-    //     origin: 'bottom',
-    //     distance: '80px',
-    //     duration: 1000,
-    //     reset: true
-    // });
-
-    // /* SCROLL PROJECTS */
-    // srtop.reveal('.work .box', { interval: 200 });
-
-    // isotope filter products
     var $grid = $('.box-container').isotope({
         itemSelector: '.grid-item',
         layoutMode: 'fitRows',
@@ -90,8 +68,6 @@ function showProjects(projects) {
             columnWidth: 200
         }
     });
-
-    // filter items on button click
     $('.button-group').on('click', 'button', function () {
         $('.button-group').find('.is-checked').removeClass('is-checked');
         $(this).addClass('is-checked');
@@ -103,9 +79,6 @@ function showProjects(projects) {
 getProjects().then(data => {
     showProjects(data);
 })
-// fetch projects end
-
-// Start of Tawk.to Live Chat
 var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
 (function () {
     var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
@@ -115,9 +88,6 @@ var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
     s1.setAttribute('crossorigin', '*');
     s0.parentNode.insertBefore(s1, s0);
 })();
-// End of Tawk.to Live Chat
-
-// disable developer mode
 document.onkeydown = function (e) {
     if (e.keyCode == 123) {
         return false;
