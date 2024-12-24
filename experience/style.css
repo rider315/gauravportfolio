@@ -464,3 +464,11 @@ header .navbar ul li a:hover{
   top: calc(100% - 12rem);
 }
 /* scroll top ends */
+
+
+/* Increase font size for experience descriptions */
+.experience .timeline .container .content .desc ul li {
+  font-size: 12px; /* Adjust this value as needed */
+  line-height: 1.6; /* Adjust line height for better readability */
+  margin: 5px;
+}

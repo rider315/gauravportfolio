@@ -347,6 +347,7 @@ header .navbar ul li a:hover {
 /* about section starts */
 .about {
   background: rgb(255, 255, 255);
+  min-height: 50vh;
 }
 .about .row {
   display: flex;
@@ -460,7 +461,7 @@ header .navbar ul li a:hover {
 
 /* skills section starts */
 .skills {
-  min-height: 90vh;
+  min-height: 85vh;
   background: linear-gradient(to bottom, #57059e, #4a00e0);
 }
 .skills h2 {
@@ -535,7 +536,7 @@ header .navbar ul li a:hover {
 /* education section starts */
 .education {
   background: #e5ecfb;
-  min-height: 80vh;
+  min-height: 50vh;
 }
 .education .qoute {
   font-size: 1.5rem;
@@ -1222,4 +1223,10 @@ form .button-area {
 #scroll-top.active {
   top: calc(100% - 12rem);
 }
+.experience .timeline .container .content .desc ul li {
+  font-size: 12px; /* Adjust this value as needed */
+  line-height: 1.6; /* Adjust line height for better readability */
+  margin: 5px;
+}
+
 /* scroll top ends */
