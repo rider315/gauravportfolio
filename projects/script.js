@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     $('#menu').click(function () {
         $(this).toggleClass('fa-times');
         $('.navbar').toggleClass('nav-toggle');
@@ -17,25 +16,23 @@ $(document).ready(function () {
     });
 });
 
-document.addEventListener('visibilitychange',
-    function () {
-        if (document.visibilityState === "visible") {
-            document.title = "Projects | Portfolio Gaurav Chaudhary";
-            $("#favicon").attr("href", "/assets/images/favicon.png");
-        }
-        else {
-            document.title = "Come Back To Portfolio";
-            $("#favicon").attr("href", "/assets/images/favhand.png");
-        }
-    });
-function getProjects() {
-    return fetch("projects.json")
-        .then(response => response.json())
-        .then(data => {
-            return data
-        });
-}
+document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === "visible") {
+        document.title = "Projects | Portfolio Gaurav Chaudhary";
+        $("#favicon").attr("href", "/assets/images/favicon.png");
+    } else {
+        document.title = "Come Back To Portfolio";
+        $("#favicon").attr("href", "/assets/images/favhand.png");
+    }
+});
 
+// Fetch projects
+function getProjects() {
+    return fetch("/projects/projects.json") // Adjusted for Render
+        .then(response => response.json())
+        .then(data => data)
+        .catch(error => console.error('Error fetching projects:', error));
+}
 
 function showProjects(projects) {
     let projectsContainer = document.querySelector(".work .box-container");
@@ -43,24 +40,40 @@ function showProjects(projects) {
     projects.forEach(project => {
         projectsHTML += `
         <div class="grid-item ${project.category}">
-        <div class="box tilt" style="width: 380px; margin: 1rem">
-      <img draggable="false" src="/assets/images/projects/${project.image}.png" alt="project" />
-      <div class="content">
-        <div class="tag">
-        <h3>${project.name}</h3>
-        </div>
-        <div class="desc">
-          <p>${project.desc}</p>
-          <div class="btns">
-            <a href="${project.links.view}" class="btn" target="_blank"><i class="fas fa-eye"></i> View</a>
-            <a href="${project.links.code}" class="btn" target="_blank">Code <i class="fas fa-code"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>`
+            <div class="box tilt" style="width: 380px; margin: 1rem">
+                <img draggable="false" src="/assets/images/projects/${project.image}.png" alt="project" />
+                <div class="content">
+                    <div class="tag">
+                        <h3>${project.name}</h3>
+                    </div>
+                    <div class="desc">
+                        <p>${project.desc}</p>
+                        <div class="btns">
+                            <a href="${project.links.view}" class="btn" target="_blank"><i class="fas fa-eye"></i> View</a>
+                            <a href="${project.links.code}" class="btn" target="_blank">Code <i class="fas fa-code"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
     });
     projectsContainer.innerHTML = projectsHTML;
+
+    // Vanilla Tilt
+    VanillaTilt.init(document.querySelectorAll(".tilt"), {
+        max: 20,
+    });
+
+    // Scroll Reveal Animation
+    const srtop = ScrollReveal({
+        origin: 'bottom',
+        distance: '80px',
+        duration: 1000,
+        reset: true
+    });
+    srtop.reveal('.work .box', { interval: 200 });
+
+    // Isotope Filter
     var $grid = $('.box-container').isotope({
         itemSelector: '.grid-item',
         layoutMode: 'fitRows',
@@ -68,6 +81,8 @@ function showProjects(projects) {
             columnWidth: 200
         }
     });
+
+    // Filter items on button click
     $('.button-group').on('click', 'button', function () {
         $('.button-group').find('.is-checked').removeClass('is-checked');
         $(this).addClass('is-checked');
@@ -77,8 +92,10 @@ function showProjects(projects) {
 }
 
 getProjects().then(data => {
-    showProjects(data);
-})
+    if (data) showProjects(data);
+});
+
+// Tawk.to Live Chat
 var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
 (function () {
     var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
@@ -88,20 +105,12 @@ var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
     s1.setAttribute('crossorigin', '*');
     s0.parentNode.insertBefore(s1, s0);
 })();
+
+// Disable Developer Mode
 document.onkeydown = function (e) {
-    if (e.keyCode == 123) {
-        return false;
-    }
-    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-        return false;
-    }
-    if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-        return false;
-    }
-    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-        return false;
-    }
-    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-        return false;
-    }
-}
+    if (e.keyCode == 123) return false;
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+};
