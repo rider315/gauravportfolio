@@ -82,6 +82,11 @@ function showProjects(projects) {
         }
     });
 
+    // Ensure footer background after layout completes
+    $grid.on('layoutComplete', function() {
+        $('.footer').css('background', 'rgb(0, 1, 43)');
+    });
+
     // Filter items on button click
     $('.button-group').on('click', 'button', function () {
         $('.button-group').find('.is-checked').removeClass('is-checked');
